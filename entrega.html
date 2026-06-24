@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrega de Produto</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:30px;
+}
+
+h1{
+    text-align:center;
+    color:#004A8F;
+}
+
+/* Pesquisa */
+.areaPesquisa{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:30px 0;
+}
+
+input, select{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+#pesquisa{
+    width:350px;
+}
+
+button{
+    background:#004A8F;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#00366a;
+}
+
+/* Formulário */
+.formulario{
+    display:none;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    margin-bottom:25px;
+}
+
+.formulario input{
+    width:100%;
+    margin-bottom:15px;
+}
+
+/* Tabela */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th{
+    background:#004A8F;
+    color:white;
+    padding:15px;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f2f2f2;
+}
+
+</style>
+</head>
+<body>
+
+<h1>Entrega de Produto</h1>
+
+<div class="areaPesquisa">
+
+    <input type="text" id="pesquisa"
+    placeholder="Pesquisar produto...">
+
+    <select id="filtro">
+        <option value="0">Identificação</option>
+        <option value="1">Status</option>
+        <option value="2">Data</option>
+        <option value="3">Usuário</option>
+        <option value="4">Observação</option>
+    </select>
+
+</div>
+
+<div style="text-align:center; margin-bottom:25px;">
+    <button onclick="abrirFormulario()">
+        + Nova Entrega de Produto
+    </button>
+</div>
+
+<!-- FORMULÁRIO -->
+<div class="formulario" id="formulario">
+
+    <h2>Novo Produto</h2>
+
+    <input type="text" id="identificacao"
+    placeholder="Identificação do Produto">
+
+    <input type="text" id="status"
+    placeholder="Status do Produto">
+
+    <input type="date" id="data">
+
+    <input type="text" id="usuario"
+    placeholder="Usuário de Registro">
+
+    <input type="text" id="observacao"
+    placeholder="Observação">
+
+    <button onclick="adicionarProduto()">
+        Adicionar Produto
+    </button>
+
+</div>
+
+<!-- TABELA -->
+<table id="tabela">
+
+<thead>
+
+<tr>
+    <th>Identificação do Produto</th>
+    <th>Status do Produto</th>
+    <th>Data de Registro</th>
+    <th>Usuário de Registro</th>
+    <th>Observação</th>
+</tr>
+
+</thead>
+
+<tbody id="corpoTabela">
+
+</tbody>
+
+</table>
+
+
+<script>
+
+function abrirFormulario(){
+
+    let formulario = document.getElementById("formulario");
+
+    if(formulario.style.display == "block"){
+        formulario.style.display = "none";
+    }else{
+        formulario.style.display = "block";
+    }
+
+}
+
+function adicionarProduto(){
+
+    let identificacao = document.getElementById("identificacao").value;
+    let status = document.getElementById("status").value;
+    let data = document.getElementById("data").value;
+    let usuario = document.getElementById("usuario").value;
+    let observacao = document.getElementById("observacao").value;
+
+    let tabela = document.getElementById("corpoTabela");
+
+    tabela.innerHTML += `
+    <tr>
+        <td>${identificacao}</td>
+        <td>${status}</td>
+        <td>${data}</td>
+        <td>${usuario}</td>
+        <td>${observacao}</td>
+    </tr>
+    `;
+
+    document.getElementById("identificacao").value = "";
+    document.getElementById("status").value = "";
+    document.getElementById("data").value = "";
+    document.getElementById("usuario").value = "";
+    document.getElementById("observacao").value = "";
+
+}
+
+
+document.getElementById("pesquisa").addEventListener("keyup", function(){
+
+    let texto = this.value.toLowerCase();
+
+    let coluna = document.getElementById("filtro").value;
+
+    let linhas = document.querySelectorAll("#corpoTabela tr");
+
+    linhas.forEach(function(linha){
+
+        let celulas = linha.getElementsByTagName("td");
+
+        if(celulas[coluna].innerText.toLowerCase().includes(texto)){
+            linha.style.display = "";
+        }
+        else{
+            linha.style.display = "none";
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

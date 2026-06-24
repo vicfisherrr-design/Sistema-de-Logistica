@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel - Sistema Logístico Sherwin-Williams</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background-color:#f4f6f9;
+}
+
+/* TOPO */
+.topo{
+    background:white;
+    padding:20px;
+    position:relative;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo{
+    display:block;
+    margin:auto;
+    width:180px;
+}
+
+/* BOTÕES SUPERIORES */
+.acoes{
+    position:absolute;
+    top:20px;
+    right:20px;
+}
+
+.acoes button{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    margin-left:10px;
+    font-size:20px;
+    background:#004A8F;
+    color:white;
+}
+
+.acoes button:hover{
+    background:#00376b;
+}
+
+/* ÁREA DE BOAS-VINDAS */
+.boasVindas{
+    width:90%;
+    margin:30px auto;
+}
+
+.boasVindas h1{
+    color:#004A8F;
+    margin-bottom:8px;
+}
+
+.boasVindas p{
+    color:#666;
+}
+
+/* INDICADORES */
+.indicadores{
+    width:90%;
+    margin:auto;
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.card{
+    flex:1;
+    min-width:250px;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.card h2{
+    color:#004A8F;
+    font-size:18px;
+}
+
+.numero{
+    font-size:40px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+/* PROCESSOS */
+.processos{
+    width:90%;
+    margin:40px auto;
+}
+
+.processos h2{
+    color:#004A8F;
+    margin-bottom:20px;
+}
+
+.botoes{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.botoes button{
+    padding:15px 30px;
+    border:none;
+    border-radius:8px;
+    background:#004A8F;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.botoes button:hover{
+    background:#00376b;
+}
+
+</style>
+</head>
+<body>
+
+<!-- TOPO -->
+<div class="topo">
+
+    <div class="acoes">
+        <button onclick="emDesenvolvimento()">🔔</button>
+<button onclick="emDesenvolvimento()">👤</button>
+    </div>
+
+    <img class="logo"
+    src="https://tse1.mm.bing.net/th/id/OIP.CMeAGQ1yxszkqRsW-KlDWAHaEK?pid=Api&P=0&h=180">
+
+</div>
+
+<!-- BOAS-VINDAS -->
+<div class="boasVindas">
+
+    <h1>Olá, Felipe</h1>
+
+    <p>
+        Login realizado em:
+        <span id="dataHora"></span>
+    </p>
+
+</div>
+
+<!-- INDICADORES -->
+<div class="indicadores">
+
+    <div class="card">
+        <h2>Produtos Recebidos Hoje</h2>
+        <div class="numero">0</div>
+    </div>
+
+    <div class="card">
+        <h2>Produtos Entregues Hoje</h2>
+        <div class="numero">0</div>
+    </div>
+
+    <div class="card">
+        <h2>Produtos em Processo</h2>
+        <div class="numero">0</div>
+    </div>
+
+</div>
+
+<!-- PROCESSOS -->
+<div class="processos">
+
+    <h2>Acessar Processos</h2>
+
+    <div class="botoes">
+
+        <button onclick="window.location.href='recebimento.html'">
+    Recebimento de Produtos
+</button>
+
+<button onclick="window.location.href='entrega.html'">
+    Entrega de Produtos
+</button>
+
+<button onclick="window.location.href='processo.html'">
+    Produtos em Processo
+</button>
+
+<button onclick="emDesenvolvimento()">
+    Histórico
+</button>
+    </div>
+
+</div>
+
+<script>
+
+// Mostra data e hora do login
+const agora = new Date();
+
+document.getElementById("dataHora").innerHTML =
+agora.toLocaleDateString('pt-BR') + " às " +
+agora.toLocaleTimeString('pt-BR');
+
+</script>
+
+</body>
+</html>
